@@ -1,3 +1,12 @@
 <resources>
-    <string name="app_name">Android-Basisapplikation</string>
+    <string name="app_name">Geheime-Bildergalerie</string>
+    <string name="label_creation">Eintrag erstellen</string>
+    <string name="label_detail">Detailansicht</string>
+    <string name="label_gallery">Geheime Galerie</string>
+
+    <string name="load_gallery">Aus der Galerie laden</string>
+    <string name="take_picture">Mit der Kamera aufnehmen</string>
+    <string name="hint_title">Bildtitel</string>
+    <string name="hint_description">Bildbeschreibung</string>
+    <string name="save_entry">Übernehmen</string>
 </resources>
