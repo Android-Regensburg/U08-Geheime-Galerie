@@ -1,6 +1,6 @@
 {
   "title": "Geheime Bildergalerie",
-  "abstract": "In dieser Aufgabe implementieren sie eine Bildergalerie-App. Sie lernen, wie andere Applikationen ihres Gerätes in ihre App einbeziehen können. Zudem werden Ihre Kenntnisse bezüglich Room-Datenbanken und der Darstellung von Daten in einer RecyclerView aufgefrischt und erweitert.",
+  "abstract": "In dieser Aufgabe implementieren Sie eine Bildergalerie-App. Sie lernen, wie Sie andere Applikationen Ihres Gerätes in ihre App einbeziehen können. Zudem werden Ihre Kenntnisse bezüglich Room-Datenbanken und der Darstellung von Daten in einer RecyclerView aufgefrischt und erweitert.",
   "hasStarterCode": true,
   "hasSolutionCode": true,
   "solutionAvailableOn": "2021-06-10"
