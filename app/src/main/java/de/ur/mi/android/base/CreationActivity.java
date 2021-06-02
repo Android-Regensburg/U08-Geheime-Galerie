@@ -8,7 +8,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,7 +17,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -28,10 +26,9 @@ import de.ur.mi.android.base.secret_image.SecretImage;
 public class CreationActivity extends AppCompatActivity implements View.OnClickListener {
 
     private static final int REQUEST_TAKE_PHOTO = 1;
-    private static final int REQUEST_LOAD_IMAGE = 2;
     public static final String KEY_SECRET_IMAGE_CREATED = "SECRET_IMAGE_CREATED";
-    private EditText titleInput, descriptionInput;
-    private Button cameraButton, galleryButton, saveButton;
+    private EditText descriptionInput;
+    private Button saveButton;
     private ImageView imagePreview;
     private Bitmap image = null;
 
@@ -40,36 +37,23 @@ public class CreationActivity extends AppCompatActivity implements View.OnClickL
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // Kamera wird direkt gestartet
+        takePictureWithCamera();
         initUI();
     }
 
     private void initUI(){
         setContentView(R.layout.activity_creation);
         imagePreview = findViewById(R.id.image_preview);
-        titleInput = findViewById(R.id.title_input);
         descriptionInput = findViewById(R.id.description_input);
-        cameraButton = findViewById(R.id.camera_button);
-        galleryButton = findViewById(R.id.gallery_button);
         saveButton = findViewById(R.id.save_button);
-        cameraButton.setOnClickListener(this);
-        galleryButton.setOnClickListener(this);
         saveButton.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.camera_button:
-                takePictureWithCamera();
-                break;
-            case R.id.gallery_button:
-                loadImageFromGallery();
-                break;
-            case R.id.save_button:
-                sendEntryBack();
-                break;
-            default:
-                break;
+        if(v.getId() == R.id.save_button){
+            sendEntryBack();
         }
     }
 
@@ -96,48 +80,37 @@ public class CreationActivity extends AppCompatActivity implements View.OnClickL
         }
     }
 
-    private void loadImageFromGallery() {
-        Intent loadImageIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        startActivityForResult(loadImageIntent, REQUEST_LOAD_IMAGE);
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_TAKE_PHOTO && resultCode == RESULT_OK) {
+            image = BitmapFactory.decodeFile(currentPhotoPath, getBitmapOptions());
+            imagePreview.setImageBitmap(image);
+        }
+        else if(resultCode == RESULT_CANCELED){ // Kamera wurde beendet, ohne ein Bild aufzunehmen
+            // Activity beenden und resultCode dementsprechend setzen
+            setResult(Activity.RESULT_CANCELED);
+            finish();
+        }
     }
 
+    /**
+     * Überprüft, ob alle Eingaben getätigt wurden und schickt die Daten als Resultat zurück an die GalleryActivity
+     * */
     private void sendEntryBack(){
-        String title = titleInput.getText().toString().trim();
         String description = descriptionInput.getText().toString().trim();
-        if(!inputValid(title, description)){
+        if(!description.isEmpty() && image != null){
             Toast.makeText(this, "Du hast noch nicht alles ausgefüllt", Toast.LENGTH_SHORT).show();
             return;
         }
         Intent returnIntent = new Intent();
-        SecretImage secretImage = new SecretImage(null, title, description);
+        SecretImage secretImage = new SecretImage(null, description);
         secretImage.setImgPath(createImageFromBitmap(image, secretImage.getId()));
         returnIntent.putExtra(KEY_SECRET_IMAGE_CREATED, secretImage);
+        // resultCode und Intent setzen
         setResult(Activity.RESULT_OK, returnIntent);
+        // Activity beenden
         finish();
-    }
-
-    private boolean inputValid(String title, String description){
-        return !title.isEmpty() && !description.isEmpty() && image != null;
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        Log.d("ACTIVITY RESULT", "reqCode: " + requestCode + ", resCode: " + resultCode);
-        if (requestCode == REQUEST_TAKE_PHOTO && resultCode == RESULT_OK) {
-            image = BitmapFactory.decodeFile(currentPhotoPath, getBitmapOptions());
-            imagePreview.setImageBitmap(image);
-        } else if (requestCode == REQUEST_LOAD_IMAGE && resultCode == RESULT_OK) {
-            Uri selectedImageUri = data.getData();
-            if (selectedImageUri != null) {
-                try {
-                    image = BitmapFactory.decodeStream(getContentResolver().openInputStream(selectedImageUri), null, getBitmapOptions());
-                    imagePreview.setImageBitmap(image);
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
     }
 
     private BitmapFactory.Options getBitmapOptions() {

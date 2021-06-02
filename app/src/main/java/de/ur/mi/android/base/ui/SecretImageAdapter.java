@@ -20,9 +20,9 @@ public class SecretImageAdapter extends RecyclerView.Adapter<SecretImageAdapter.
     private ArrayList<SecretImage> dataList;
     private final Activity context;
 
-    public SecretImageAdapter(Activity context, ArrayList<SecretImage> list){
+    public SecretImageAdapter(Activity context){
         this.context = context;
-        this.dataList = list;
+        this.dataList = new ArrayList<>();
     }
 
     public void updateData(ArrayList<SecretImage> newDataList){

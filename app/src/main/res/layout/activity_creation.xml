@@ -8,7 +8,7 @@
     <ImageView
         android:id="@+id/image_preview"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="400dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
@@ -20,70 +20,23 @@
         app:srcCompat="@drawable/ic_baseline_add_a_photo_32"
         tools:srcCompat="@tools:sample/avatars" />
 
-    <Button
-        android:id="@+id/gallery_button"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="4dp"
-        android:layout_weight="50"
-        android:backgroundTint="@color/colorPrimary"
-        android:text="@string/load_gallery"
-        android:textColor="@android:color/white"
-        app:layout_constraintBottom_toBottomOf="@+id/camera_button"
-        app:layout_constraintEnd_toStartOf="@+id/camera_button"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/image_preview" />
-
-    <Button
-        android:id="@+id/camera_button"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_weight="50"
-        android:backgroundTint="@color/colorPrimary"
-        android:text="@string/take_picture"
-        android:textColor="@android:color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/gallery_button"
-        app:layout_constraintTop_toBottomOf="@+id/image_preview" />
-
-    <EditText
-        android:id="@+id/title_input"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="16dp"
-        android:ems="10"
-        android:gravity="center"
-        android:hint="@string/hint_title"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/gallery_button" />
-
     <EditText
         android:id="@+id/description_input"
         style="@style/Widget.AppCompat.EditText"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="start"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:background="@null"
         android:gravity="start"
         android:hint="@string/hint_description"
         android:inputType="textMultiLine"
-        android:textStyle="italic"
-        app:layout_constraintBottom_toTopOf="@+id/save_button"
+        android:textSize="18sp"
+        android:textStyle="normal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title_input" />
+        app:layout_constraintTop_toBottomOf="@+id/image_preview" />
 
     <Button
         android:id="@+id/save_button"
@@ -98,7 +51,7 @@
         android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

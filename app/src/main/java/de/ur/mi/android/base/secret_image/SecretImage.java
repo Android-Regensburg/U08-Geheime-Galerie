@@ -11,14 +11,12 @@ public class SecretImage implements Serializable {
     @NonNull
     private String id;
     private String imgPath;
-    private String title;
     private String description;
 
 
-    public SecretImage(String imgPath, String title, String description) {
+    public SecretImage(String imgPath, String description) {
         this.id = UUID.randomUUID().toString();
         this.imgPath = imgPath;
-        this.title = title;
         this.description = description;
     }
 
@@ -29,14 +27,6 @@ public class SecretImage implements Serializable {
 
     public void setId(@NonNull String id) {
         this.id = id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
     }
 
     public String getDescription() {
