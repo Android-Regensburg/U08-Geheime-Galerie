@@ -103,9 +103,11 @@ public class CreationActivity extends AppCompatActivity implements View.OnClickL
             Toast.makeText(this, "Du hast noch nicht alles ausgefüllt", Toast.LENGTH_SHORT).show();
             return;
         }
+        String storedImagePath = storeBitmapInPrivateFile(image);
+        // Objekt von SecretImage basierend auf dem Speicherpfad und der Description erstellen
+        SecretImage secretImage = new SecretImage(storedImagePath, description);
+
         Intent returnIntent = new Intent();
-        SecretImage secretImage = new SecretImage(null, description);
-        secretImage.setImgPath(storeBitmapInPrivateFile(image, secretImage.getId()));
         returnIntent.putExtra(KEY_SECRET_IMAGE_CREATED, secretImage);
         // resultCode und Intent setzen
         setResult(Activity.RESULT_OK, returnIntent);
@@ -137,19 +139,17 @@ public class CreationActivity extends AppCompatActivity implements View.OnClickL
 
     //
     /**
-     * Speichern des Bildes im internen Speicher der App, unzugänglich für andere Apps
-     *
-     *
+     * Speichern des Bildes im internen Speicher der App, unzugänglich für andere Apps. Gibt den Namen/ Pfad des abgespeicherten Bildes zurück,
+     * das man dann mit "BitmapFactory.decodeStream(CONTEXT.openFileInput(PATH))" erneut laden kann
      * siehe: https://stackoverflow.com/Questions/4352172/how-do-you-pass-images-bitmaps-between-android-activities-using-bundles
      * */
-    private String storeBitmapInPrivateFile(Bitmap bmp, String name){
-        String fileName = name;//no .png or .jpg needed
+    private String storeBitmapInPrivateFile(Bitmap bmp){
+        String fileName = String.valueOf(System.currentTimeMillis());//no .png or .jpg needed
         try {
             ByteArrayOutputStream bytes = new ByteArrayOutputStream();
             bmp.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
             FileOutputStream fo = openFileOutput(fileName, Context.MODE_PRIVATE);
             fo.write(bytes.toByteArray());
-            // remember close file output
             fo.close();
         } catch (Exception e) {
             e.printStackTrace();
