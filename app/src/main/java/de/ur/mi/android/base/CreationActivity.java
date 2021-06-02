@@ -99,13 +99,13 @@ public class CreationActivity extends AppCompatActivity implements View.OnClickL
      * */
     private void sendEntryBack(){
         String description = descriptionInput.getText().toString().trim();
-        if(!description.isEmpty() && image != null){
+        if(description.isEmpty()){
             Toast.makeText(this, "Du hast noch nicht alles ausgefüllt", Toast.LENGTH_SHORT).show();
             return;
         }
         Intent returnIntent = new Intent();
         SecretImage secretImage = new SecretImage(null, description);
-        secretImage.setImgPath(createImageFromBitmap(image, secretImage.getId()));
+        secretImage.setImgPath(storeBitmapInPrivateFile(image, secretImage.getId()));
         returnIntent.putExtra(KEY_SECRET_IMAGE_CREATED, secretImage);
         // resultCode und Intent setzen
         setResult(Activity.RESULT_OK, returnIntent);
@@ -135,8 +135,14 @@ public class CreationActivity extends AppCompatActivity implements View.OnClickL
         return imageFile;
     }
 
-    // https://stackoverflow.com/Questions/4352172/how-do-you-pass-images-bitmaps-between-android-activities-using-bundles
-    private String createImageFromBitmap(Bitmap bmp, String name){
+    //
+    /**
+     * Speichern des Bildes im internen Speicher der App, unzugänglich für andere Apps
+     *
+     *
+     * siehe: https://stackoverflow.com/Questions/4352172/how-do-you-pass-images-bitmaps-between-android-activities-using-bundles
+     * */
+    private String storeBitmapInPrivateFile(Bitmap bmp, String name){
         String fileName = name;//no .png or .jpg needed
         try {
             ByteArrayOutputStream bytes = new ByteArrayOutputStream();
