@@ -1,51 +1,33 @@
----
-title: Android Basisapplikation
-author: Zuletzt bearbeitet von Alexander Bazo
-documentclass: scrartcl
-classoption:
-  - a4paper
-header-includes: |
-    \usepackage{german} 
-    \usepackage[a4paper,left=2.5cm, right=2.5cm,top=2.5cm, bottom=3cm]{geometry}
-    \usepackage{fancyhdr}
-    \pagestyle{fancy}
-    \fancyhf{}
-    \rhead{Mobile Apps für Android}
-    \lhead{Übungsaufgaben}
-    \cfoot{\includegraphics[height=2cm]{docs/footer.png}}
----
+# U08 | Geheime-Bildergalerie
 
-# Android Basisapplikation
+## Aufgabe
 
-Dieses Repository dient als Vorlage für die Übungsaufgaben des Android-Kurses. Im `master`-Branch des
-Repositorys befindet sich das Starterpaket, das als Ausgangslage für die Bearbeitung durch die Studierenden
-dient. Die Aufgabenbeschreibung wird in der `Readme.md`-Datei verfasst. Zugehörige Dateien, z.B. Bilder
-oder Videos, werden im Ordner `/docs` abgelegt. Der fertige Lösungsvorschlag wird auf Basis des Starterpakets
-in einem separaten Branch `solution` gepflegt. **Dieser Abschnitt wird durch eine kurze Beschreibung der
-jeweiligen Aufgabe ersetzt. Unter der Kurzbeschreibung wird ein aussagekräftiger Screenshot der zu
-entwickelnden Anwendung platziert.**
+In dieser Aufgabe implementieren Sie eine Bilder-Galerie-App, in der neu aufgenommene Fotos abgelegt werden können, auf die Sie nur über die App zugreifen können. Das _User Interface_ der Anwendung haben wir bereits für Sie vorbereitet, kann aber beliebig von Ihnen erweitert werden. Ihre Aufgabe ist das Implementieren des Aufnehmens von Bildern mit der Kamera, das Speichern dieser in einer entsprechenden Room-Datenbank, sowie das Anzeigen dieser in der RecyclerView der Bildergalerie. Einen Eindruck der fertigen App erhalten Sie über die Screenshots am Ende dieser Beschreibung.
 
-![](./docs/cover.png)
+## Allgemeine Hinweise
 
-## Downloads
+### Kameraaufnahmen mit dem Emulator
 
-- [Download des Starterpakets](Link zum direkten Download des Master-Branch)
-- [Download des Lösungsvorschlag](Link zum direkten Download des Solution-Branch)
+Damit Sie die Einbindung der Kamera auch auf ihrem Emulator testen und echte Kameraaufnahmen simulieren können, können Sie in der erweiterten Einstellungen des AVD Managers ihres Emulators beispielsweise die Frontkamera auf "Webcam" (sofern vorhanden) oder die Backkamera auf "Virtual Scene" setzen. Die Option Virtual Scene ermöglicht die Navigation in einer virtuellen Umgebung, in der dann Bilder aufgenommen werden können. Mit ALT + Maus können Sie sich umsehen und mit ALT + WASD können Sie sich in der Scene bewegen. (Bei MAC Nutzern dementsprechend Option + Maus bzw. Option + WASD)
 
-## Aufgabenbeschreibung
+## Vorgehen
 
-Hier folgt die Aufgabenbeschreibung auf Basis des ursprünglichen Handouts.
+### 
 
----
 
-## Hinweise zur Arbeit mit dieser Vorlage
 
-1. Für jede Aufgabe wird ein neues Repository in der Organisation `Android-Regensburg` erstellt. Grundlage (*Template*) ist [dieses Repository](https://github.com/Android-Regensburg/Template-Uebungsaufgaben).
-2. Die Repositorys werden einheitlich nach dem Muster `U` + laufende Nummer + `-` + Name der Übung benannt.
-3. Im Master-Branch werden Aufgabenbeschreibung (*Readme*) und Starter-Code ergänzt.
-4. Eingefügte Aufgabenbeschreibung und Starter-Code werden *committet* (Commit-Message: *Initialer Commit mit Aufgabenbeschreibung und Starterpaket*).
-5. Auf Basis des Master-Branch wird eine neue Branch `solution` erstellt. Dort wird der bestehende Code mit dem Lösungsvorschlag ergänzt und *comittet* (Commit-Message: *Lösungsvorschlag ergänzt*).
+### 
 
-Da Code und Repository ggf. auch den Studierenden zugänglich gemacht werden, werden Commit-Messages, Issues und In-Code-Kommentare auf Deutsch verfasst.
 
-**Auf Basis der `YAML`-Metadaten zu Beginn der Datei kann mit *pandoc* ein PDF des Dokuments mit korrekter Formatierung erzeugt werden.**
+
+### 
+
+
+
+### 
+
+
+
+## Screenshots der Anwendung
+
+![Screenshots der Laufapp](./docs/screenshots.png)
