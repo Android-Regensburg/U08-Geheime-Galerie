@@ -30,8 +30,8 @@ public class CreationActivity extends AppCompatActivity implements View.OnClickL
     private EditText descriptionInput;
     private Button saveButton;
     private ImageView imagePreview;
-    private Bitmap image = null;
 
+    private Bitmap image = null;
     private String currentPhotoPath;
 
     @Override

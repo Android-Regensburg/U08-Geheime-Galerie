@@ -7,6 +7,6 @@
     <string name="load_gallery">Aus der Galerie laden</string>
     <string name="take_picture">Mit der Kamera aufnehmen</string>
     <string name="hint_title">Bildtitel</string>
-    <string name="hint_description">Bildbeschreibung</string>
+    <string name="hint_description">Bildbeschreibung...</string>
     <string name="save_entry">Übernehmen</string>
 </resources>
