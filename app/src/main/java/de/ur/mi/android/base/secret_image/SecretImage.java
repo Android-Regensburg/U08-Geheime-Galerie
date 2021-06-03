@@ -1,21 +1,31 @@
 package de.ur.mi.android.base.secret_image;
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.Serializable;
 import java.util.UUID;
 
 /**
  * Stellt einen einzelnen Eintrag in der Bildergalerie dar.
- * Das
  * */
 public class SecretImage implements Serializable {
     private String id;
     private String imgPath;
     private String description;
 
-
-    public SecretImage(String imgPath, String description) {
+    public SecretImage(String imgPath, String description){
         this.id = UUID.randomUUID().toString();
         this.imgPath = imgPath;
         this.description = description;
+    }
+
+    public SecretImage(Bitmap bmp, String description, Context context){
+        this.id = UUID.randomUUID().toString();
+        this.description = description;
+        this.imgPath = storeBitmapInPrivateFile(bmp, context);
     }
 
     public String getId() {
@@ -30,15 +40,38 @@ public class SecretImage implements Serializable {
         return description;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public String getImgPath() {
         return imgPath;
     }
 
-    public void setImgPath(String imgPath) {
-        this.imgPath = imgPath;
+    /**Lädt ein Bitmap aus dem internen Speicher basierend auf dem imgPath und gibt es nach außen*/
+    public Bitmap getBitmap(Context context){
+        Bitmap btm = null;
+        try {
+            btm = BitmapFactory.decodeStream(context.openFileInput(this.imgPath));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        return btm;
+    }
+
+    /**
+     * Speichern des Bildes im internen Speicher der App, unzugänglich für andere Apps.
+     * Gibt den Namen/ Pfad des abgespeicherten Bildes zurück.
+     * Mit "BitmapFactory.decodeStream(CONTEXT.openFileInput(PATH))" kann das Bild aus dem Speicher geladen werden
+     * */
+    private String storeBitmapInPrivateFile(Bitmap bmp, Context context){
+        String fileName = this.id;
+        try {
+            ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+            bmp.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+            FileOutputStream fo = context.openFileOutput(fileName, Context.MODE_PRIVATE);
+            fo.write(bytes.toByteArray());
+            fo.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            fileName = null;
+        }
+        return fileName;
     }
 }
