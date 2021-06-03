@@ -26,7 +26,7 @@ Implementieren Sie zunächst das Aufrufen der bereits auf dem System installiert
 Das aufgenommene Bild können dann im übergebenen Intent der überschriebenen onActivityResult() Methode erhalten. Versuchen Sie zudem eine sinnvolle Lösung für den Fall, dass der Nutzer kein Bild aufnimmt und die Kamera einfach schließt, zu implementieren. 
 Wurde das Bild erfolgreich aufgenommen, so soll es in der ImageView angezeigt werden und kann mit einer Beschreibung versehen werden. Beim Klick auf den Speicher-Button soll basierend auf den erhobenen Daten ein Objekt der Klasse SecretImage erstellt und an die GalleryActivity zurückgegeben werden, um es dann dort anzeigen zu lassen. 
 
-Eine gute Anlaufstelle zur Einbindung der Kamera ist in diesem Guide zu finden: https://developer.android.com/training/camera/photobasics
+Eine gute Anlaufstelle zur Einbindung der Kamera ist [in diesem Guide](https://developer.android.com/training/camera/photobasics) zu finden.
 
 ### Bilder in der RecyclerView anzeigen
 
