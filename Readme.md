@@ -35,7 +35,7 @@ In der bindViews() Methode des SecretImageViewHolders können die angezeigten El
 ### Room Datenbank implementieren um Bilder dauerhaft zu speichern
 Damit unsere SecretImages dauerhaft erhalten bleiben, sollen sie in einer Room-Datenbank gespeichert werden. Annotieren Sie also die entsprechend zu speichernde Entität und Erstellen sie das DataAccessObject, die Datenbank und eine Datenbank-Helfer Klasse. Binden Sie anschließend die Datenbank an den entsprechenden Stellen an die restliche App an.
 
-Sie können sich hierbei am Lösungsvorschlag der Datenbank-Implementierung der 5. Übungsaufgabe (https://android-regensburg.github.io/AssignmentViewer/index.html#Android-Regensburg/U05-Persistente-ToDo-Liste) orientieren. 
+Sie können sich hierbei am Lösungsvorschlag der Datenbank-Implementierung der [5. Übungsaufgabe](https://android-regensburg.github.io/AssignmentViewer/index.html#Android-Regensburg/U05-Persistente-ToDo-Liste) orientieren. 
 
 
 ## Screenshots der Anwendung
