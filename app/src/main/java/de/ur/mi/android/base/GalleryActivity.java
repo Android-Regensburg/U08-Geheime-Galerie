@@ -2,11 +2,9 @@ package de.ur.mi.android.base;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import de.ur.mi.android.base.secret_image.SecretImage;
 import de.ur.mi.android.base.secret_image.SecretImageManager;
 import de.ur.mi.android.base.ui.SecretImageAdapter;
 
@@ -30,7 +28,7 @@ public class GalleryActivity extends AppCompatActivity implements SecretImageMan
         addPictureBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO: CreationActivity starten, welche ein SecretImage als Resultat zurückgibt
+                //TODO: CreationActivity starten, welche ein SecretImage als Resultat liefert
             }
         });
     }
