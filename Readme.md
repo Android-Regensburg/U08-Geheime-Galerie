@@ -10,21 +10,23 @@ In dieser Aufgabe implementieren Sie eine Bilder-Galerie-App, in der neu aufgeno
 
 Damit Sie das Einbinden der Kamera auch auf ihrem Emulator testen und echte Kameraaufnahmen simulieren können, können Sie in den erweiterten Einstellungen des AVD Managers ihres Emulators beispielsweise die Frontkamera auf "Webcam" (sofern vorhanden) oder die Backkamera auf "Virtual Scene" setzen. Die Option Virtual Scene ermöglicht die Navigation in einer virtuellen Umgebung, in der dann Bilder aufgenommen werden können. Mit ALT + Maus können Sie sich umsehen und mit ALT + WASD können Sie sich in der Szene bewegen. (Bei MAC Nutzern dementsprechend Option + Maus bzw. Option + WASD)
 
+### Bereits implementierter Code
+
+3 Activities
+SecretImage
+SecretImageManager
+
 ## Vorgehen
 
-### 
+### Navigation innerhalb der App, starten der Kamera und zurückgeben eines neuen SecretImages-Objekt an die GalleryActivity
 
 
 
-### 
+### Bild in der RecyclerView anzeigen
 
 
 
-### 
-
-
-
-### 
+### Room Datenbank implementieren um Bilder dauerhaft zu speichern
 
 
 
