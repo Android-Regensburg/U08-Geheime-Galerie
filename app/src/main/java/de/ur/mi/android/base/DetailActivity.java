@@ -16,5 +16,6 @@ public class DetailActivity extends AppCompatActivity {
 
     private void initUI() {
         setContentView(R.layout.activity_detail);
+        // TODO: Views mit den entsprechenden Daten befüllen
     }
 }

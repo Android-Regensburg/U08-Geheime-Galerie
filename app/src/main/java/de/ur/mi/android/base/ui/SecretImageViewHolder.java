@@ -16,6 +16,6 @@ public class SecretImageViewHolder extends RecyclerView.ViewHolder{
     }
 
     public void bindViews(final SecretImage secretImage, final Context context) {
-        //TODO: Foto in die ImageView laden und bei einem Klick in die DetailActivity wechseln
+        //TODO: Bild in die ImageView laden und bei einem Klick in die DetailActivity wechseln
     }
 }
