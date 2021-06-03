@@ -8,8 +8,8 @@ In dieser Aufgabe implementieren Sie eine Bilder-Galerie-App, in der neu aufgeno
 
 ### Kameraaufnahmen mit dem Emulator
 
-Damit Sie das Einbinden der Kamera auch auf ihrem Emulator testen und echte Kameraaufnahmen simulieren können, können Sie in den erweiterten Einstellungen des AVD Managers ihres Emulators beispielsweise die Frontkamera auf "Webcam" (sofern vorhanden) oder die Back-Kamera auf "Virtual Scene" setzen. Die Option Virtual Scene ermöglicht das Navigieren in einer virtuellen Umgebung, in der dann Bilder aufgenommen werden können. Mit `ALT + Maus` können Sie sich umsehen und mit `ALT + WASD` können Sie sich in der Szene bewegen. (Bei MAC Nutzern dementsprechend `Option + Maus` bzw. `Option + WASD`)
-Achtung: Das Navigieren in der Virtual Scene funktioniert nicht, wenn der Emulator in einem Tool Window von Android Studio gestartet wird. Um den Emulator als eigenständige Anwendung zu starten, muss unter **File -> Setting -> Tools -> Emulator** der **Haken bei "Launch in a tool window" entfernt** werden.
+Damit Sie das Einbinden der Kamera auch auf ihrem Emulator testen und echte Kameraaufnahmen simulieren können, können Sie in den erweiterten Einstellungen des AVD Managers ihres Emulators beispielsweise die Frontkamera auf "Webcam" (sofern vorhanden) oder die Back-Kamera auf "Virtual Scene" setzen. Die Option Virtual Scene ermöglicht das Navigieren in einer virtuellen Umgebung, in der dann Bilder aufgenommen werden können. Mit `ALT + Maus` können Sie sich umsehen und mit `ALT + WASD` können Sie sich in der Szene bewegen. (Bei MAC Nutzern dementsprechend `Option + Maus` bzw. `Option + WASD`)<br/>
+**Achtung:** Das Navigieren in der Virtual Scene funktioniert nicht, wenn der Emulator in einem Tool Window von Android Studio gestartet wird. Um den Emulator als eigenständige Anwendung zu starten, muss unter **File -> Setting -> Tools -> Emulator** der **Haken bei "Launch in a tool window" entfernt** werden.
 
 ### Bereits implementierter Code
 
