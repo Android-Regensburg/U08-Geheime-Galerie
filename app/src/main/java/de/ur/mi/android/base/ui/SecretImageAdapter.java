@@ -18,6 +18,7 @@ public class SecretImageAdapter extends RecyclerView.Adapter<SecretImageViewHold
         this.dataList = new ArrayList<>();
     }
 
+    /**Datenliste wird durch neue Liste ersetzt und der Adapter darüber informiert*/
     public void updateData(ArrayList<SecretImage> newDataList){
         this.dataList = newDataList;
         this.notifyDataSetChanged();
