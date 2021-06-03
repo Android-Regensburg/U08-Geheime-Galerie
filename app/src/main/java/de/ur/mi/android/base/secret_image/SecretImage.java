@@ -1,14 +1,12 @@
 package de.ur.mi.android.base.secret_image;
-import androidx.annotation.NonNull;
-import androidx.room.Entity;
-import androidx.room.PrimaryKey;
 import java.io.Serializable;
 import java.util.UUID;
 
-@Entity(tableName = "secret_image_table")
+/**
+ * Stellt einen einzelnen Eintrag in der Bildergalerie dar.
+ * Das
+ * */
 public class SecretImage implements Serializable {
-    @PrimaryKey
-    @NonNull
     private String id;
     private String imgPath;
     private String description;
@@ -20,12 +18,11 @@ public class SecretImage implements Serializable {
         this.description = description;
     }
 
-    @NonNull
     public String getId() {
         return id;
     }
 
-    public void setId(@NonNull String id) {
+    public void setId(String id) {
         this.id = id;
     }
 
