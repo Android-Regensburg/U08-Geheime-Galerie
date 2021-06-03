@@ -28,10 +28,6 @@ public class DetailActivity extends AppCompatActivity {
         ImageView imageView = findViewById(R.id.image_view);
         TextView imageDescription = findViewById(R.id.image_description);
         imageDescription.setText(secretImage.getDescription());
-        try {
-            imageView.setImageBitmap(BitmapFactory.decodeStream(getApplicationContext().openFileInput(secretImage.getImgPath())));
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+        imageView.setImageBitmap(secretImage.getBitmap(this));
     }
 }

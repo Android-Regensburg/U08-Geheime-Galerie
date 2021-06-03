@@ -1,8 +1,6 @@
 package de.ur.mi.android.base.ui;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.view.View;
 import android.widget.ImageView;
 import androidx.recyclerview.widget.RecyclerView;
@@ -22,8 +20,7 @@ public class SecretImageViewHolder extends RecyclerView.ViewHolder{
     }
 
     public void bindViews(final SecretImage secretImage, final Context context) throws FileNotFoundException {
-        Bitmap image = BitmapFactory.decodeStream(context.openFileInput(secretImage.getImgPath()));
-        imageView.setImageBitmap(image);
+        imageView.setImageBitmap(secretImage.getBitmap(context));
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

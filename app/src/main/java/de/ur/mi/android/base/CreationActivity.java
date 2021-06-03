@@ -15,9 +15,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -103,9 +101,7 @@ public class CreationActivity extends AppCompatActivity implements View.OnClickL
             Toast.makeText(this, "Du hast noch nicht alles ausgefüllt", Toast.LENGTH_SHORT).show();
             return;
         }
-        String storedImagePath = storeBitmapInPrivateFile(image);
-        // Objekt von SecretImage basierend auf dem Speicherpfad und der Description erstellen
-        SecretImage secretImage = new SecretImage(storedImagePath, description);
+        SecretImage secretImage = new SecretImage(image, description, this);
 
         Intent returnIntent = new Intent();
         returnIntent.putExtra(KEY_SECRET_IMAGE_CREATED, secretImage);
@@ -135,26 +131,5 @@ public class CreationActivity extends AppCompatActivity implements View.OnClickL
         File imageFile = File.createTempFile(imageFileName, ".jpg", storageDir);
         currentPhotoPath = imageFile.getAbsolutePath();
         return imageFile;
-    }
-
-    //
-    /**
-     * Speichern des Bildes im internen Speicher der App, unzugänglich für andere Apps. Gibt den Namen/ Pfad des abgespeicherten Bildes zurück,
-     * das man dann mit "BitmapFactory.decodeStream(CONTEXT.openFileInput(PATH))" erneut laden kann
-     * siehe: https://stackoverflow.com/Questions/4352172/how-do-you-pass-images-bitmaps-between-android-activities-using-bundles
-     * */
-    private String storeBitmapInPrivateFile(Bitmap bmp){
-        String fileName = String.valueOf(System.currentTimeMillis());//no .png or .jpg needed
-        try {
-            ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-            bmp.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
-            FileOutputStream fo = openFileOutput(fileName, Context.MODE_PRIVATE);
-            fo.write(bytes.toByteArray());
-            fo.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-            fileName = null;
-        }
-        return fileName;
     }
 }
