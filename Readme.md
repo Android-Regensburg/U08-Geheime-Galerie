@@ -15,9 +15,9 @@ Achtung: Das Navigieren in der Virtual Scene funktioniert nicht, wenn der Emulat
 
 Im Starterpacket finden sie neben dem vorgegebenen Layout auch bereits implementierte Klassen. Die App besteht aus drei Activities. Die **GalleryActivity** beinhaltet eine RecyclerView, in der die aufgenommenen Bilder in einer Rasteransicht dargestellt werden. Wird auf eines der Bilder geklickt, so soll man zur **DetailActivity** gelangen, in der das Bild und sein Beschreibungstext vergrößert angezeigt wird. Um ein neues Bild zur Galerie hinzuzufügen, wird man über den FloatingActionButton zur **CreationActivity** weitergeleitet. In dieser soll mithilfe der Kamera ein Bild aufgenommen und anschließend mit einem Beschreibungstext versehen werden. Das Aufnehmen von Bildern soll dabei nicht selbst implementiert werden. Stattdessen wird die (jeweils auf dem System installierte) Kamera-App von Android ein Bild an die eigene App liefern.
 
-Die Klasse SecretImage stellt einen einzelnen Eintrag in unserer Galerie dar. Beim Erstellen eines neuen Objektes dieser Klasse wird das im Konstruktor übergebene Bitmap über eine bereits implementierte Methode im internen Speicher der App gespeichert. Statt dem Bild wird dann nur der Pfad zum Speicherort als Klassenvariable hinterlegt. Um das jeweilige Bild zu laden kann die getBitmap() Methode verwendet werden, die basierend auf dem Pfad das Bild wieder aus dem Speicher lädt. 
+Die Klasse **SecretImage** stellt einen einzelnen Eintrag in unserer Galerie dar. Beim Erstellen eines neuen Objektes dieser Klasse wird das im Konstruktor übergebene Bitmap über eine bereits implementierte Methode im internen Speicher der App gespeichert. Statt dem Bild wird dann nur der Pfad zum Speicherort als Klassenvariable hinterlegt. Um das jeweilige Bild zu laden kann die getBitmap() Methode verwendet werden, die basierend auf dem Pfad das Bild wieder aus dem Speicher lädt. 
 
-Der SecretImageManager dient der Abtrennung von Daten und UI. Er verwaltet die Daten und gibt diese nach außen. Über ein Interface gibt der SecretImageManager bei Änderung der Daten dem Listener Bescheid.
+Der **SecretImageManager** dient der Abtrennung von Daten und UI. Er verwaltet die Daten und gibt diese nach außen. Über ein Interface gibt der SecretImageManager bei Änderung der Daten dem Listener Bescheid.
 
 ## Vorgehen
 
@@ -30,7 +30,7 @@ Eine gute Anlaufstelle zur Einbindung der Kamera ist in diesem Guide zu finden: 
 
 ### Bilder in der RecyclerView anzeigen
 
-In der bindViews() Methode des SecretImageViewHolders können die angezeigten Elemente der RecyclerView mit den entsprechenden Daten versehen werden. Außerdem besteht hier die Möglichkeit, einzelne Views mit einem Klick-Listener zu versehen, über den man dann in die DetailActivitiy gelangt, um eine detailliertere Ansicht über das Bild zu bekommen. Damit in der DetailActivity das UI entsprechend geladen werden kann, muss via Intent das angeklickt SecretImage Objekt übergeben werden. 
+In der bindViews() Methode des SecretImageViewHolders können die angezeigten Elemente der RecyclerView mit den entsprechenden Daten versehen werden. Außerdem besteht hier die Möglichkeit, einzelne Views mit einem Klick-Listener zu versehen, über den man dann in die DetailActivity gelangt, um eine detailliertere Ansicht über das Bild zu bekommen. Damit in der DetailActivity das UI entsprechend geladen werden kann, muss via Intent das angeklickt SecretImage Objekt übergeben werden. 
 
 ### Room Datenbank implementieren um Bilder dauerhaft zu speichern
 Damit unsere SecretImages dauerhaft erhalten bleiben, sollen sie in einer Room-Datenbank gespeichert werden. Annotieren Sie also die entsprechend zu speichernde Entität und Erstellen sie das DataAccessObject, die Datenbank und eine Datenbank-Helfer Klasse. Binden Sie anschließend die Datenbank an den entsprechenden Stellen an die restliche App an.
