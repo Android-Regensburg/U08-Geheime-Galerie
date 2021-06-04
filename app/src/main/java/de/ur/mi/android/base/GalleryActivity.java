@@ -41,10 +41,6 @@ public class GalleryActivity extends AppCompatActivity implements SecretImageMan
 
     private void initRecyclerView(){
         RecyclerView recyclerView = findViewById(R.id.recycler_view);
-        // LayoutManager für die RecyclerView, welche die Elemente in einem Raster mit "NUMBER_OF_COLUMS" Spalten anordnet
-        GridLayoutManager layoutManager = new GridLayoutManager(getApplicationContext(), NUMBER_OF_COLUMNS);
-        // layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-        recyclerView.setLayoutManager(layoutManager);
         adapter = new SecretImageAdapter(this);
         recyclerView.setAdapter(adapter);
     }
