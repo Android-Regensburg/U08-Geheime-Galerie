@@ -17,5 +17,6 @@ public class SecretImageViewHolder extends RecyclerView.ViewHolder{
 
     public void bindViews(final SecretImage secretImage, final Context context) {
         //TODO: Bild in die ImageView laden und bei einem Klick in die DetailActivity wechseln
+        // Mit der Methode .setImageBitmap(bitmap) kann ein Bitmap in die ImageView geladen werden
     }
 }
