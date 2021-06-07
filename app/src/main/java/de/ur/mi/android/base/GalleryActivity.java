@@ -1,6 +1,5 @@
 package de.ur.mi.android.base;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,9 +11,7 @@ import de.ur.mi.android.base.ui.SecretImageAdapter;
 
 public class GalleryActivity extends AppCompatActivity implements SecretImageManager.SecretImageManagerListener {
 
-    public static final String KEY_SECRET_IMAGE = "SECRET_IMAGE";
     private static final int REQUEST_CREATE_SECRET_IMAGE = 1;
-    private static final int NUMBER_OF_COLUMNS = 3; // Anzahl der Spalten in dem Raster unserer RecyclerView
     private SecretImageAdapter adapter; // Adapter für die RecyclerView
     private SecretImageManager secretImageManager; // verwaltet unsere Daten/ Ermöglicht Trennung von UI und Datenschicht
 
@@ -32,7 +29,11 @@ public class GalleryActivity extends AppCompatActivity implements SecretImageMan
         addPictureBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Wechseln in die CreationActivity
+                /*
+                Wechseln in die CreationActivity.
+                Wir wollen von dieser ein SecretImage als Resultat erhalten, weshalb die
+                Activity mit startActivityForResult() gestartet wird.
+                */
                 Intent i = new Intent(getApplicationContext(), CreationActivity.class);
                 startActivityForResult(i, REQUEST_CREATE_SECRET_IMAGE);
             }
@@ -47,6 +48,7 @@ public class GalleryActivity extends AppCompatActivity implements SecretImageMan
 
     private void initSecretImageManager(){
         secretImageManager = new SecretImageManager(getApplicationContext(), this);
+        // einmaliges Updaten anfordern
         secretImageManager.requestUpdate();
     }
 

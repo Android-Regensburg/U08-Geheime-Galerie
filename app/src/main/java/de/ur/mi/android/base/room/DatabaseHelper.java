@@ -16,13 +16,23 @@ public class DatabaseHelper {
     }
 
     private void initDatabase(){
+        /*
+         Achtung: Wir erlauben mit allowMainThreadQueries() explizit, dass Datenbankabfragen im UI-Thread laufen können,
+         was NICHT empfohlen wird.
+         */
         db = Room.databaseBuilder(context, SecretImageDatabase.class, DATABASE_NAME).allowMainThreadQueries().build();
     }
 
+    /**
+     * Einzelnes SecretImage zur Datenbank hinzufügen
+     * */
     public void addSecretImage(SecretImage img){
         db.secretImageDAO().insertSecret(img);
     }
 
+    /**
+     * Liste mit allen in der Datenbank gespeicherten SecretImages erhalten
+     * */
     public ArrayList<SecretImage> getAllSecretImages(){
         return new ArrayList<SecretImage>(db.secretImageDAO().getAllSecrets());
     }

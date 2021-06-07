@@ -1,14 +1,13 @@
 package de.ur.mi.android.base;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
-import java.io.FileNotFoundException;
 import de.ur.mi.android.base.secret_image.SecretImage;
 
 public class DetailActivity extends AppCompatActivity {
 
+    public static final String KEY_SECRET_IMAGE = "secret-image";
     private SecretImage secretImage;
 
     @Override
@@ -18,9 +17,9 @@ public class DetailActivity extends AppCompatActivity {
         initUI();
     }
 
-    // Extras des Intents abfangen
+    // Intent und seine Extras abfangen
     private void receiveExtras(){
-        secretImage = (SecretImage) getIntent().getSerializableExtra(GalleryActivity.KEY_SECRET_IMAGE);
+        secretImage = (SecretImage) getIntent().getSerializableExtra(KEY_SECRET_IMAGE);
     }
 
     private void initUI() {
