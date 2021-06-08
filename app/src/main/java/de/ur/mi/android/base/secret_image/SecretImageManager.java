@@ -15,13 +15,6 @@ public class SecretImageManager {
         this.secretImagesList = dbHelper.getAllSecretImages();
     }
 
-    /**
-     * Einmaliges Update des SecretImageManagers anfordern
-     * */
-    public void requestUpdate(){
-        listener.onSecretImageListUpdated();
-    }
-
     public ArrayList<SecretImage> getSecretImagesList(){
         return this.secretImagesList;
     }

@@ -8,24 +8,18 @@ import de.ur.mi.android.base.secret_image.SecretImage;
 public class DetailActivity extends AppCompatActivity {
 
     public static final String KEY_SECRET_IMAGE = "secret-image";
-    private SecretImage secretImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        receiveExtras();
         initUI();
-    }
-
-    // Intent und seine Extras abfangen
-    private void receiveExtras(){
-        secretImage = (SecretImage) getIntent().getSerializableExtra(KEY_SECRET_IMAGE);
     }
 
     private void initUI() {
         setContentView(R.layout.activity_detail);
         ImageView imageView = findViewById(R.id.image_view);
         TextView imageDescription = findViewById(R.id.image_description);
+        SecretImage secretImage = (SecretImage) getIntent().getSerializableExtra(KEY_SECRET_IMAGE);
         imageDescription.setText(secretImage.getDescription());
         imageView.setImageBitmap(secretImage.getBitmap(this));
     }

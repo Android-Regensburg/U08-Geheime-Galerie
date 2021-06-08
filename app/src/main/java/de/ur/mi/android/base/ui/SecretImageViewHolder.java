@@ -10,23 +10,32 @@ import de.ur.mi.android.base.secret_image.SecretImage;
 
 public class SecretImageViewHolder extends RecyclerView.ViewHolder{
 
-    ImageView imageView;
+    private final ImageView imageView;
+    private final SecretImageViewHolderListener listener;
 
-    public SecretImageViewHolder(View itemView) {
+    public SecretImageViewHolder(View itemView, SecretImageViewHolderListener listener) {
         super(itemView);
         imageView = itemView.findViewById(R.id.grid_item_image_view);
+        this.listener = listener;
     }
 
-    public void bindViews(final SecretImage secretImage, final Context context) {
+    public void bindViews(final SecretImage secretImage, Context context) {
         imageView.setImageBitmap(secretImage.getBitmap(context));
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                listener.onImageViewSelected(getAdapterPosition());
+                /*
                 // Wechseln in die DetailActivity und übergeben des angeklickten SecretImages
                 Intent intent = new Intent(context, DetailActivity.class);
                 intent.putExtra(DetailActivity.KEY_SECRET_IMAGE, secretImage);
-                context.startActivity(intent);
+                context.startActivity(intent);*/
             }
         });
+    }
+
+    public interface SecretImageViewHolderListener  {
+
+        void onImageViewSelected(int position);
     }
 }
