@@ -14,6 +14,10 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
 
@@ -30,12 +34,25 @@ public class CreationActivity extends AppCompatActivity {
     public static final String KEY_SECRET_IMAGE_CREATED = "SECRET_IMAGE_CREATED";
     private static final int REQUEST_TAKE_PHOTO = 1;
     private String imagePathForCurrentCameraIntent;
+    private ActivityResultLauncher<Intent> launcher;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initUI();
+        initLauncher();
         startCameraIntentForPicture();
+    }
+
+    private void initLauncher() {
+        launcher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
+            if (result.getResultCode() == Activity.RESULT_OK){
+                updateImagePreview();
+            }
+            else if (result.getResultCode() == Activity.RESULT_CANCELED){
+                finishActivityWithFailState();
+            }
+        });
     }
 
     private void initUI() {
@@ -65,7 +82,7 @@ public class CreationActivity extends AppCompatActivity {
                 // Neben der URI erwartet der Intent noch das EXTRA_OUTPUT, um das Bild in Originalgöße speichern zu können
                 // Ohne EXTRA_OUTPUT wird das Bild lediglich als Thumbnail zurückgegeben
                 takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
-                startActivityForResult(takePictureIntent, REQUEST_TAKE_PHOTO);
+                launcher.launch(takePictureIntent);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -109,13 +126,5 @@ public class CreationActivity extends AppCompatActivity {
         finish();
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQUEST_TAKE_PHOTO && resultCode == RESULT_OK) {
-            updateImagePreview();
-        } else if (resultCode == RESULT_CANCELED) { // Kamera wurde beendet, ohne ein Bild aufzunehmen
-            finishActivityWithFailState();
-        }
-    }
+
 }

@@ -34,7 +34,7 @@ public class DatabaseHelper {
      * Liste mit allen in der Datenbank gespeicherten SecretImages erhalten
      * */
     public ArrayList<SecretImage> getAllSecretImages(){
-        return new ArrayList<SecretImage>(db.secretImageDAO().getAllSecrets());
+        return new ArrayList<>(db.secretImageDAO().getAllSecrets());
     }
 }
 
