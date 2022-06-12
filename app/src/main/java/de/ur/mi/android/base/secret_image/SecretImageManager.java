@@ -1,18 +1,28 @@
 package de.ur.mi.android.base.secret_image;
 import android.content.Context;
 import java.util.ArrayList;
+import java.util.List;
+
+import de.ur.mi.android.base.room.DatabaseExecutor;
 import de.ur.mi.android.base.room.DatabaseHelper;
 
 public class SecretImageManager {
 
     private final ArrayList<SecretImage> secretImagesList;
-    private final DatabaseHelper dbHelper;
+    private final DatabaseExecutor dbExecutor;
     private final SecretImageManagerListener listener;
 
     public SecretImageManager(Context context, SecretImageManagerListener listener){
         this.listener = listener;
-        this.dbHelper = new DatabaseHelper(context);
-        this.secretImagesList = dbHelper.getAllSecretImages();
+        this.dbExecutor = new DatabaseExecutor(context);
+        this.secretImagesList = new ArrayList<>();
+        dbExecutor.loadAllSecretImages(new DatabaseExecutor.DataLoadListener() {
+            @Override
+            public void onDataLoaded(List<SecretImage> loadedImages) {
+                secretImagesList.addAll(loadedImages);
+                listener.onSecretImageListUpdated();
+            }
+        });
     }
 
     public ArrayList<SecretImage> getSecretImagesList(){
@@ -21,7 +31,7 @@ public class SecretImageManager {
 
     public void addSecretImage(SecretImage img){
         secretImagesList.add(img);
-        dbHelper.addSecretImage(img);
+        dbExecutor.insertSecretImage(img);
         listener.onSecretImageListUpdated();
     }
 

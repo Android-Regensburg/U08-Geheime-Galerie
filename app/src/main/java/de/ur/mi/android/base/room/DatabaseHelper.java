@@ -16,11 +16,7 @@ public class DatabaseHelper {
     }
 
     private void initDatabase(){
-        /*
-         Achtung: Wir erlauben mit allowMainThreadQueries() explizit, dass Datenbankabfragen im UI-Thread laufen können,
-         was NICHT empfohlen wird.
-         */
-        db = Room.databaseBuilder(context, SecretImageDatabase.class, DATABASE_NAME).allowMainThreadQueries().build();
+        db = Room.databaseBuilder(context, SecretImageDatabase.class, DATABASE_NAME).build();
     }
 
     /**
