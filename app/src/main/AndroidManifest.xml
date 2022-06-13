@@ -14,14 +14,23 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".GalleryActivity" android:label="@string/label_gallery">
+        <activity
+            android:name=".GalleryActivity"
+            android:label="@string/label_gallery"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".CreationActivity" android:label="@string/label_creation"></activity>
-        <activity android:name=".DetailActivity" android:label="@string/label_detail"></activity>
+        <activity
+            android:name=".CreationActivity"
+            android:label="@string/label_creation"
+            android:exported="false"/>
+        <activity
+            android:name=".DetailActivity"
+            android:label="@string/label_detail"
+            android:exported="false"/>
 
     </application>
 

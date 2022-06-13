@@ -3,6 +3,8 @@ import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import de.ur.mi.android.base.R;
@@ -25,10 +27,10 @@ public class SecretImageAdapter extends RecyclerView.Adapter<SecretImageViewHold
     }
 
     @Override
+    @NonNull
     public SecretImageViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.grid_item, parent, false);
-        SecretImageViewHolder viewHolder = new SecretImageViewHolder(v);
-        return viewHolder;
+        return new SecretImageViewHolder(v);
     }
 
     @Override
