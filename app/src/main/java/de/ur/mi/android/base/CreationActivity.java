@@ -32,7 +32,6 @@ import de.ur.mi.android.base.secret_image.SecretImage;
 public class CreationActivity extends AppCompatActivity {
 
     public static final String KEY_SECRET_IMAGE_CREATED = "SECRET_IMAGE_CREATED";
-    private static final int REQUEST_TAKE_PHOTO = 1;
     private String imagePathForCurrentCameraIntent;
     private ActivityResultLauncher<Intent> launcher;
 
