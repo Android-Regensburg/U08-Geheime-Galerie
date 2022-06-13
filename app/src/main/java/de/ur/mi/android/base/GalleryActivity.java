@@ -39,6 +39,10 @@ public class GalleryActivity extends AppCompatActivity implements SecretImageMan
         initActivityLauncher();
     }
 
+    /**
+     * Wir registrieren die Activity dafür, ein Result einer anderen Activity die mit diesem
+     * Launcher gestartet wird zu erhalten und zu verarbeiten.
+     */
     private void initActivityLauncher() {
         activityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
             if (result.getResultCode() == Activity.RESULT_OK) {
@@ -55,6 +59,10 @@ public class GalleryActivity extends AppCompatActivity implements SecretImageMan
         recyclerView.setAdapter(adapter);
     }
 
+    /**
+     * Wir initialsieren den FloatingActionButton und starten bei einem Klick die CreationActivity
+     * der App mit Hilfe des ActivityResultLaunchers, um das Ergebnis später verarbeiten zu können.
+     */
     private void initFloatingActionButton() {
         FloatingActionButton addPictureBtn = findViewById(R.id.add_picture_button);
         addPictureBtn.setOnClickListener(v -> activityResultLauncher.launch(new Intent(getApplicationContext(), CreationActivity.class)));

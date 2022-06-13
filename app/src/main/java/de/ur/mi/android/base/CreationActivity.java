@@ -49,6 +49,10 @@ public class CreationActivity extends AppCompatActivity {
         startCameraIntentForPicture();
     }
 
+    /**
+     * Wir regsitrieren die Activity dafür ein Ergebnis einer anderen Activity welches mit dem
+     * Launcher gestartet wird zu erhalten und verarbeiten.
+     */
     private void initLauncher() {
         launcher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
             if (result.getResultCode() == Activity.RESULT_OK){
@@ -77,6 +81,11 @@ public class CreationActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Wir erstellen einen Intent welcher eine Kamera-App für uns öffnet. Durch das starten der
+     * Kamera-App mit dem ActivityResultLauncher können wir uns das Ergebnis (in diesem Fall das
+     * gemachte Bild) zurückliefern lassen und verarbeiten.
+     */
     private void startCameraIntentForPicture() {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
@@ -95,6 +104,7 @@ public class CreationActivity extends AppCompatActivity {
         }
     }
 
+    
     private File createImageFile() throws IOException {
         LocalDateTime current = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("ddMMyyyy_HHmmss");
