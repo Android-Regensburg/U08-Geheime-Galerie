@@ -26,11 +26,22 @@ Auch für die Verwaltung der Bilder innerhalb der Anwendung stehen bereits einig
 ## Vorgehen
 
 ### Starten der Kamera und empfangen des aufgenommenen Bildes
-Sorgen Sie dafür, dass beim Klick auf den _Floating Action Button_ die `CreationActivity` aufgerufen wird. Implementieren Sie dort die Aufnahme eines neuen Fotos mit einer anderen auf dem Gerät installierten Kamera-App. Der Aufruf externer Apps erfolgt dabei, indem Sie einen entsprechenden Intent gemeinsam mit einem selbstgewählten _request code_ an die Methode `startActivityForResult(Intent intent, in requestCode)` übergeben. Die Erstellung des Intent-Objekts variiert hier jedoch je nach Anwendungsfall. Für die Erzeugung des Intents zum Aufruf der Kamera können Sie sich an den Codebeispielen der Vorlesung oder des weiter unten verlinkten Guides orientieren. Im verlinkten Guide finden Sie außerdem eine Anleitung, wie Sie einen `FileProvider` im Manifest registrieren.
-Ob die Aufnahme erfolgreich abgeschlossen war, erfahren Sie, wenn nach dem Beenden der gestarteten, externen Activity die Methode `onActivityResult()` der eigenen Activity aufgerufen wurde. Versuchen Sie hier auch eine sinnvolle Lösung für den Fall zu implementieren, dass die Nutzer\*innen die Kamera-App schließen, ohne ein Bild aufgenommen zu haben. 
+Sorgen Sie dafür, dass beim Klick auf den _Floating Action Button_ die `CreationActivity` aufgerufen wird. Implementieren Sie dort die Aufnahme eines neuen Fotos mit einer anderen auf dem Gerät installierten Kamera-App. Der Aufruf externer Apps erfolgt dabei, indem Sie einen `ActivityResultLauncher` anlegen. Dies erreichen Sie über folgenden Aufruf:
+```
+ActivityResultLauncher launcher(new ActivityResultContracts.startActivityForResult(), new ActivityResultCallback<ActivityResult>() {
+    @Override
+    public void onActivityResult(ActivityResult result) {
+        //Hier können Sie das result verarbeiten
+    }
+});
+```
+Um von einer anderen Activity ein Result zu erhalten starten Sie diese mit dem ActivityResultLauncher mit dem Code `launcher.launch(Intent intent)`.
+Die Erstellung des Intent-Objekts variiert hier jedoch je nach Anwendungsfall. Für die Erzeugung des Intents zum Aufruf der Kamera können Sie sich an den Codebeispielen der Vorlesung oder des weiter unten verlinkten Guides orientieren. Im verlinkten Guide finden Sie außerdem eine Anleitung, wie Sie einen `FileProvider` im Manifest registrieren.
+Ob die Aufnahme erfolgreich abgeschlossen ist, können Sie aus dem `result` des implementierten ActivityResultLaunchers mit `result.getResultCode()` auslesen. Versuchen Sie hier auch eine sinnvolle Lösung für den Fall zu implementieren, dass die Nutzer\*innen die Kamera-App schließen, ohne ein Bild aufgenommen zu haben. 
 Wurde das Bild erfolgreich aufgenommen, so soll es in der `ImageView` der Activity angezeigt werden und von den Nutzer\*innen mit einer Beschreibung versehen werden. Beim Klick auf den Speicher-Button soll basierend aus den erhobenen Daten ein Objekt der Klasse `SecretImage` erstellt und an die `GalleryActivity` zurückgegeben werden, um es dann dort anzeigen zu lassen.
 
-Eine gute Anlaufstelle zur Einbindung der Kamera ist [in diesem Guide](https://developer.android.com/training/camera/photobasics) zu finden.
+Eine gute Anlaufstelle zur Einbindung der Kamera ist [in diesem Guide](https://developer.android.com/training/camera/photobasics#TaskCaptureIntent) zu finden. 
+Eine ausführlichere Erklärung zum ActivityResultLauncher gibt es [in diesem Guide](https://developer.android.com/training/basics/intents/result). Beachten Sie hier, dass der für uns relevante ActivityResultContract `ActivityResultContracts.StartActivityForResult()` ist.
 
 ### Bilder in der RecyclerView anzeigen
 
@@ -42,7 +53,7 @@ Klicks auf einzelne Bilder der Galerie sollen dafür sorgen, dass die `DetailAct
 
 ### Room Datenbank implementieren, um Bilder dauerhaft zu speichern
 
-Damit unsere _SecretImages_ dauerhaft erhalten bleiben, sollen Sie in einer Room-Datenbank gespeichert werden. Annotieren Sie also die entsprechend zu speichernde Entität und Erstellen sie das _DataAccessObject_, die Datenbank und eine passende _Helper_-Klasse. Binden Sie anschließend die Datenbank an den entsprechenden Stellen an die restliche App an.
+Damit unsere _SecretImages_ dauerhaft erhalten bleiben, sollen Sie in einer Room-Datenbank gespeichert werden. Annotieren Sie also die entsprechend zu speichernde Entität und Erstellen sie das _DataAccessObject_, die Datenbank und eine passende _Helper_-Klasse. Binden Sie anschließend die Datenbank an den entsprechenden Stellen an die restliche App an. Denken Sie daran, Ihre Datenbankoperationen **nicht auf dem UI-Thread** laufen zu lassen, sondern diese alle in eigene Threads auslagern.
 
 Sie können sich hierbei am Lösungsvorschlag der Datenbank-Implementierung der [5. Übungsaufgabe](https://android-regensburg.github.io/AssignmentViewer/index.html#Android-Regensburg/U05-Persistente-ToDo-Liste) orientieren. 
 
