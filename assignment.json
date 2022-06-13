@@ -3,5 +3,5 @@
   "abstract": "In dieser Aufgabe implementieren Sie eine Bildergalerie-App. Sie lernen, wie Sie andere Applikationen Ihres Gerätes in ihre App einbeziehen können. Zudem werden Ihre Kenntnisse bezüglich Room-Datenbanken und der Darstellung von Daten in einer RecyclerView aufgefrischt und erweitert.",
   "hasStarterCode": true,
   "hasSolutionCode": true,
-  "solutionAvailableOn": "2021-06-10"
+  "solutionAvailableOn": "2022-06-17"
 }
