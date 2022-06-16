@@ -9,4 +9,9 @@
     <string name="hint_title">Bildtitel</string>
     <string name="hint_description">Bildbeschreibung...</string>
     <string name="save_entry">Übernehmen</string>
+
+    <string name="dialog_delete_negative">Nicht löschen</string>
+    <string name="dialog_delete_positive">Löschen</string>
+    <string name="dialog_delete_title">Möchten Sie "$IMAGE" wirklich löschen?</string>
+
 </resources>

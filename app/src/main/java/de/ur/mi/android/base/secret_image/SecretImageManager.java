@@ -16,17 +16,25 @@ public class SecretImageManager {
         this.listener = listener;
         this.dbExecutor = new DatabaseExecutor(context);
         this.secretImagesList = new ArrayList<>();
-        dbExecutor.loadAllSecretImages(new DatabaseExecutor.DataLoadListener() {
-            @Override
-            public void onDataLoaded(List<SecretImage> loadedImages) {
-                secretImagesList.addAll(loadedImages);
-                listener.onSecretImageListUpdated();
-            }
+        loadAllImages();
+    }
+
+    private void loadAllImages() {
+        dbExecutor.loadAllSecretImages(loadedImages -> {
+            secretImagesList.addAll(loadedImages);
+            listener.onSecretImageListUpdated();
         });
     }
 
     public ArrayList<SecretImage> getSecretImagesList(){
         return this.secretImagesList;
+    }
+
+    public void removeSecretImage(SecretImage image){
+        dbExecutor.deleteSecretImage(image);
+        secretImagesList.clear();
+        loadAllImages();
+        listener.onSecretImageListUpdated();
     }
 
     public void addSecretImage(SecretImage img){

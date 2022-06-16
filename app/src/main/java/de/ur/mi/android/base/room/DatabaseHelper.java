@@ -26,6 +26,10 @@ public class DatabaseHelper {
         db.secretImageDAO().insertSecret(img);
     }
 
+    public void deleteSecretImage(SecretImage image){
+        db.secretImageDAO().deleteImage(image);
+    }
+
     /**
      * Liste mit allen in der Datenbank gespeicherten SecretImages erhalten
      * */

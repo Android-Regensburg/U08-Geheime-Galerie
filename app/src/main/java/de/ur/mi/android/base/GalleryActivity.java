@@ -3,6 +3,7 @@ package de.ur.mi.android.base;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -22,7 +23,8 @@ public class GalleryActivity extends AppCompatActivity implements SecretImageMan
     private SecretImageAdapter adapter; // Adapter für die RecyclerView
     private SecretImageManager secretImageManager; // verwaltet unsere Daten/ Ermöglicht Trennung von UI und Datenschicht
 
-    ActivityResultLauncher<Intent> activityResultLauncher;
+    ActivityResultLauncher<Intent> creationActivityLauncher;
+    ActivityResultLauncher<Intent> detailActivityLauncher;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,18 +38,30 @@ public class GalleryActivity extends AppCompatActivity implements SecretImageMan
         setContentView(R.layout.activity_gallery);
         initRecyclerView();
         initFloatingActionButton();
-        initActivityLauncher();
+        initLaunchers();
     }
 
     /**
      * Wir registrieren die Activity dafür, ein Result einer anderen Activity die mit diesem
      * Launcher gestartet wird zu erhalten und zu verarbeiten.
      */
-    private void initActivityLauncher() {
-        activityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
+    private void initLaunchers() {
+        creationActivityLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
             if (result.getResultCode() == Activity.RESULT_OK) {
                 if (result.getData() != null) {
                     addNewImageFromIntent(result.getData());
+                }
+            }
+        });
+
+        detailActivityLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
+
+            if (result.getResultCode() == Activity.RESULT_OK) {
+                if (result.getData() != null) {
+                    if (result.getData().getBooleanExtra(DetailActivity.KEY_TO_BE_DELETED, false)) {
+                        SecretImage imageToDelete = (SecretImage) result.getData().getSerializableExtra(DetailActivity.KEY_SECRET_IMAGE);
+                        secretImageManager.removeSecretImage(imageToDelete);
+                    }
                 }
             }
         });
@@ -64,8 +78,8 @@ public class GalleryActivity extends AppCompatActivity implements SecretImageMan
      * der App mit Hilfe des ActivityResultLaunchers, um das Ergebnis später verarbeiten zu können.
      */
     private void initFloatingActionButton() {
-        FloatingActionButton addPictureBtn = findViewById(R.id.add_picture_button);
-        addPictureBtn.setOnClickListener(v -> activityResultLauncher.launch(new Intent(getApplicationContext(), CreationActivity.class)));
+        FloatingActionButton addPictureBtn = findViewById(R.id.fab_add_picture);
+        addPictureBtn.setOnClickListener(v -> creationActivityLauncher.launch(new Intent(getApplicationContext(), CreationActivity.class)));
     }
 
     private void initSecretImageManager() {
@@ -77,7 +91,7 @@ public class GalleryActivity extends AppCompatActivity implements SecretImageMan
     private void startDetailActivityForImage(SecretImage image) {
         Intent intent = new Intent(GalleryActivity.this, DetailActivity.class);
         intent.putExtra(DetailActivity.KEY_SECRET_IMAGE, image);
-        startActivity(intent);
+        detailActivityLauncher.launch(intent);
     }
 
     private void addNewImageFromIntent(Intent intent) {

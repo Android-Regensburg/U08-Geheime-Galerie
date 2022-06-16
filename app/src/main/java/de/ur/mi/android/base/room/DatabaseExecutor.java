@@ -23,6 +23,11 @@ public class DatabaseExecutor {
         });
     }
 
+    public void deleteSecretImage(SecretImage image){
+        Executor e = Executors.newSingleThreadExecutor();
+        e.execute(() -> helper.deleteSecretImage(image));
+    }
+
     public void loadAllSecretImages(DataLoadListener listener){
         Executor e = Executors.newSingleThreadExecutor();
         e.execute(() -> listener.onDataLoaded(helper.getAllSecretImages()));
