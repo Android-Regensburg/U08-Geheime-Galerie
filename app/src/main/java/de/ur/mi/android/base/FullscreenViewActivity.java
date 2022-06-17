@@ -48,6 +48,11 @@ public class FullscreenViewActivity extends AppCompatActivity{
         infoLauncher.launch(intent);
     }
 
+    /**
+     * Wir benutzen auch hier den ResultLauncher, damit wir das Ergenis der InfoActivity auswerten können.
+     * Der wichtige Teil hier ist abzufangen, ob der löschen-Button gedrückt wurde und wenn ja, diese
+     * Information bis zur GalleryActivity weiterzureichen
+     */
     private void initLauncher() {
         infoLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
             if (result.getResultCode() == Activity.RESULT_OK){

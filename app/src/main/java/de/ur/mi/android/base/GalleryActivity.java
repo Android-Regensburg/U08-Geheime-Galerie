@@ -41,7 +41,7 @@ public class GalleryActivity extends AppCompatActivity implements SecretImageMan
     }
 
     /**
-     * Wir registrieren die Activity dafür, ein Result einer anderen Activity die mit diesem
+     * Wir registrieren die Activity dafür, esults anderer Activities, die mit diesem
      * Launcher gestartet wird zu erhalten und zu verarbeiten.
      */
     private void initLaunchers() {
@@ -53,8 +53,11 @@ public class GalleryActivity extends AppCompatActivity implements SecretImageMan
             }
         });
 
+        /**
+         * Durch den ResultLauncher können wir über mehrere Activities hinweg results empfangen (von
+         * Gallery über FullscreenView bis Info und so mit diesen Informationen arbeiten
+         */
         detailActivityLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
-
             if (result.getResultCode() == Activity.RESULT_OK) {
                 if (result.getData() != null) {
                     if (result.getData().getBooleanExtra(FullscreenViewActivity.KEY_TO_BE_DELETED, false)) {

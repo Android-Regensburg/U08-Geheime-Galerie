@@ -21,10 +21,16 @@ public class FileRequest {
             file = createImageFile(context);
         } catch (IOException e){
             e.printStackTrace();
-            Log.d("FILEREQUEST", "Could not create temporary file");
         }
     }
 
+    /**
+     * Erstellt ein temporäres File, in welches Bilder zwischengespeichert werden können, solange
+     * sie noch bearbeitet werden.
+     * @param context App-Kontext
+     * @return ein neues File
+     * @throws IOException
+     */
     private File createImageFile(Context context) throws IOException {
         LocalDateTime current = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("ddMMyyyy_HHmmss");
@@ -34,6 +40,11 @@ public class FileRequest {
         return File.createTempFile(imageFileName, ".jpg", storageDir);
     }
 
+    /**
+     * Erstellt eine neues FileRequest-Objekt, welches als one-time use gedacht ist
+     * @param context
+     * @return
+     */
     public static FileRequest fromContext(Context context){
         return new FileRequest(context);
     }

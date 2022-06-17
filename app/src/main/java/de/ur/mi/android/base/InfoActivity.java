@@ -42,11 +42,8 @@ public class InfoActivity extends AppCompatActivity implements DeleteDialogFragm
         setContentView(R.layout.activity_info);
         initUI();
         initData();
-        try {
-            fillViewsWithData();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        fillViewsWithData();
+
     }
 
     private void initData() {
@@ -54,6 +51,10 @@ public class InfoActivity extends AppCompatActivity implements DeleteDialogFragm
         imagePosition = getIntent().getIntExtra(FullscreenViewActivity.KEY_IMAGE_POSITION, -99);
     }
 
+    /**
+     * Beim klicken des Buttons wird der DeleteDialog angezeigt. In diesem setzen wir die Activity als
+     * Listener, damit wir das Ergebnis durch die Methoden des interface verarbeiten können.
+     */
     private void initUI() {
         txtDate = findViewById(R.id.txt_date);
         txtDescription = findViewById(R.id.txt_description);
@@ -65,7 +66,7 @@ public class InfoActivity extends AppCompatActivity implements DeleteDialogFragm
         });
     }
 
-    private void fillViewsWithData() throws IOException {
+    private void fillViewsWithData(){
         ZonedDateTime captureTime = Instant.ofEpochMilli(currentImage.getDate()).atZone(ZoneId.systemDefault());
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM);
         if (currentImage.getDate() == 0) {
