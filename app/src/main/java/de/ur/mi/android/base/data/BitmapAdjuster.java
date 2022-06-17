@@ -12,10 +12,10 @@ import java.io.InputStream;
 
 public class BitmapAdjuster {
 
-    Context context;
 
-    public BitmapAdjuster(Context context){
-        this.context = context;
+
+    public BitmapAdjuster(){
+
     }
 
     private Bitmap rotateImage(Bitmap image, int degree){
@@ -42,7 +42,8 @@ public class BitmapAdjuster {
         }
     }
 
-    public Bitmap getAdjustedBitmap(String pathToOriginal, Uri targetUri) {
+
+    public Bitmap getAdjustedBitmap(Context context, String pathToOriginal, Uri targetUri) {
         Bitmap map = BitmapFactory.decodeFile(pathToOriginal);
         try {
             map = adjustBitmap(context, map, targetUri);

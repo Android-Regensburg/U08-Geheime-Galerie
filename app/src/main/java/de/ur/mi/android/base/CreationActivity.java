@@ -62,7 +62,7 @@ public class CreationActivity extends AppCompatActivity {
 
 
     private void initUI() {
-        bitmapAdjuster = new BitmapAdjuster(getApplicationContext());
+        bitmapAdjuster = new BitmapAdjuster();
         setContentView(R.layout.activity_creation);
         Button saveButton = findViewById(R.id.save_button);
         saveButton.setOnClickListener(new View.OnClickListener() {
@@ -105,7 +105,7 @@ public class CreationActivity extends AppCompatActivity {
         if (description.isEmpty()) {
             return null;
         }
-        Bitmap map = bitmapAdjuster.getAdjustedBitmap(imagePathForCurrentCameraIntent, uriForCurrentImage);
+        Bitmap map = bitmapAdjuster.getAdjustedBitmap(getApplicationContext(), imagePathForCurrentCameraIntent, uriForCurrentImage);
         return new SecretImage(map, description, this, ZonedDateTime.now(ZoneId.systemDefault()).toInstant().toEpochMilli());
     }
 
@@ -114,7 +114,7 @@ public class CreationActivity extends AppCompatActivity {
         // Die Verwendung vorgegebener Dimensionen für das neue Bild via BitmapFactory.Options
         // wäre sicherer und an dieser Stelle auch ausreichend
 
-        Bitmap map = bitmapAdjuster.getAdjustedBitmap(imagePathForCurrentCameraIntent, uriForCurrentImage);
+        Bitmap map = bitmapAdjuster.getAdjustedBitmap(getApplicationContext(), imagePathForCurrentCameraIntent, uriForCurrentImage);
         imagePreview.setImageBitmap(map);
     }
 

@@ -3,7 +3,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -12,7 +11,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import de.ur.mi.android.base.secret_image.SecretImage;
-import de.ur.mi.android.base.ui.DeleteDialogFragment;
 
 public class FullscreenViewActivity extends AppCompatActivity{
 
@@ -37,7 +35,7 @@ public class FullscreenViewActivity extends AppCompatActivity{
         currentImage = (SecretImage) getIntent().getSerializableExtra(KEY_SECRET_IMAGE);
         imagePosition = getIntent().getIntExtra(KEY_IMAGE_POSITION, -99);
         imageView.setImageBitmap(currentImage.getBitmap(this));
-        FloatingActionButton fabDelete = findViewById(R.id.fab_delete);
+        FloatingActionButton fabDelete = findViewById(R.id.fab_start_info);
         fabDelete.setOnClickListener(v -> {
             startInfoActivity();
         });

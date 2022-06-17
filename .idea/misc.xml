@@ -3,6 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Carrylord/Documents/GitHub/U08-Geheime-Galerie/app/src/main/res/drawable-night/background_preview.xml" value="0.2645" />
+        <entry key="..\:/Users/Carrylord/Documents/GitHub/U08-Geheime-Galerie/app/src/main/res/drawable/background_preview.xml" value="0.2645" />
         <entry key="..\:/Users/Carrylord/Documents/GitHub/U08-Geheime-Galerie/app/src/main/res/drawable/ic_baseline_add_a_photo_32.xml" value="0.4755" />
         <entry key="..\:/Users/Carrylord/Documents/GitHub/U08-Geheime-Galerie/app/src/main/res/drawable/ic_baseline_delete_32.xml" value="0.4755" />
         <entry key="..\:/Users/Carrylord/Documents/GitHub/U08-Geheime-Galerie/app/src/main/res/layout/activity_detail.xml" value="0.5416666666666666" />
