@@ -18,17 +18,20 @@ public class SecretImage implements Serializable {
     private String id;
     private String imgPath;
     private String description;
+    private long date;
 
-    public SecretImage(String imgPath, String description) {
+    public SecretImage(String imgPath, String description, long date) {
         this.id = UUID.randomUUID().toString();
         this.imgPath = imgPath;
         this.description = description;
+        this.date = date;
     }
 
-    public SecretImage(Bitmap bmp, String description, Context context){
+    public SecretImage(Bitmap bmp, String description, Context context, long date){
         this.id = UUID.randomUUID().toString();
         this.description = description;
         this.imgPath = storeBitmapInPrivateFile(bmp, context);
+        this.date = date;
     }
 
     @NonNull
@@ -46,6 +49,14 @@ public class SecretImage implements Serializable {
 
     public String getImgPath() {
         return imgPath;
+    }
+
+    public long getDate() {
+        return date;
+    }
+
+    public void setDate(long date) {
+        this.date = date;
     }
 
     /**Lädt ein Bitmap aus dem internen Speicher basierend auf dem imgPath und gibt es nach außen*/

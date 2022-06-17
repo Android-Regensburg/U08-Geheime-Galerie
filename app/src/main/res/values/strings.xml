@@ -1,8 +1,9 @@
 <resources>
     <string name="app_name">Geheime-Bildergalerie</string>
     <string name="label_creation">Eintrag erstellen</string>
-    <string name="label_detail">Detailansicht</string>
+    <string name="label_fullscreen">Vollbildansicht</string>
     <string name="label_gallery">Geheime Galerie</string>
+    <string name="label_info">Bildinformationen</string>
 
     <string name="load_gallery">Aus der Galerie laden</string>
     <string name="take_picture">Mit der Kamera aufnehmen</string>
@@ -12,6 +13,12 @@
 
     <string name="dialog_delete_negative">Nicht löschen</string>
     <string name="dialog_delete_positive">Löschen</string>
-    <string name="dialog_delete_title">Möchten Sie "$IMAGE" wirklich löschen?</string>
+    <string name="dialog_delete_title">Möchten Sie \"$IMAGE\" wirklich löschen?</string>
+
+    <string name="info_description_header">Beschreibung</string>
+    <string name="info_date_header">Datum und Uhrzeit</string>
+    <string name="info_location_header">Ort</string>
+    <string name="btn_delete_image">Dieses Bild löschen</string>
+
 
 </resources>

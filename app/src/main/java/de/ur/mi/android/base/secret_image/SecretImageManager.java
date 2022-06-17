@@ -30,11 +30,10 @@ public class SecretImageManager {
         return this.secretImagesList;
     }
 
-    public void removeSecretImage(SecretImage image){
+    public void removeSecretImage(SecretImage image, int position){
+        secretImagesList.remove(position);
+        listener.onSecretImageRemoved(position);
         dbExecutor.deleteSecretImage(image);
-        secretImagesList.clear();
-        loadAllImages();
-        listener.onSecretImageListUpdated();
     }
 
     public void addSecretImage(SecretImage img){
@@ -45,5 +44,6 @@ public class SecretImageManager {
 
     public interface SecretImageManagerListener{
         void onSecretImageListUpdated();
+        void onSecretImageRemoved(int position);
     }
 }

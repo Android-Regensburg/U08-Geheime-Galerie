@@ -1,10 +1,9 @@
 package de.ur.mi.android.base.ui;
 import android.content.Context;
-import android.content.Intent;
 import android.view.View;
 import android.widget.ImageView;
 import androidx.recyclerview.widget.RecyclerView;
-import de.ur.mi.android.base.DetailActivity;
+
 import de.ur.mi.android.base.R;
 import de.ur.mi.android.base.secret_image.SecretImage;
 

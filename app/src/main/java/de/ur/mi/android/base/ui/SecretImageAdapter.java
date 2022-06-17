@@ -52,10 +52,10 @@ public class SecretImageAdapter extends RecyclerView.Adapter<SecretImageViewHold
     @Override
     public void onImageViewSelected(int position) {
         SecretImage image = secretImages.get(position);
-        listener.onSecretImageSelected(image);
+        listener.onSecretImageSelected(image, position);
     }
 
     public interface SecretImageAdapterListener {
-        void onSecretImageSelected(SecretImage image);
+        void onSecretImageSelected(SecretImage image, int position);
     }
 }

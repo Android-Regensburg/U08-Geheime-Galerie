@@ -3,7 +3,6 @@ package de.ur.mi.android.base;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -58,9 +57,10 @@ public class GalleryActivity extends AppCompatActivity implements SecretImageMan
 
             if (result.getResultCode() == Activity.RESULT_OK) {
                 if (result.getData() != null) {
-                    if (result.getData().getBooleanExtra(DetailActivity.KEY_TO_BE_DELETED, false)) {
-                        SecretImage imageToDelete = (SecretImage) result.getData().getSerializableExtra(DetailActivity.KEY_SECRET_IMAGE);
-                        secretImageManager.removeSecretImage(imageToDelete);
+                    if (result.getData().getBooleanExtra(FullscreenViewActivity.KEY_TO_BE_DELETED, false)) {
+                        SecretImage imageToDelete = (SecretImage) result.getData().getSerializableExtra(FullscreenViewActivity.KEY_SECRET_IMAGE);
+                        int imagePosInAdapter = result.getData().getIntExtra(FullscreenViewActivity.KEY_IMAGE_POSITION, -99);
+                        secretImageManager.removeSecretImage(imageToDelete, imagePosInAdapter);
                     }
                 }
             }
@@ -88,9 +88,10 @@ public class GalleryActivity extends AppCompatActivity implements SecretImageMan
     }
 
 
-    private void startDetailActivityForImage(SecretImage image) {
-        Intent intent = new Intent(GalleryActivity.this, DetailActivity.class);
-        intent.putExtra(DetailActivity.KEY_SECRET_IMAGE, image);
+    private void startDetailActivityForImage(SecretImage image, int position) {
+        Intent intent = new Intent(GalleryActivity.this, FullscreenViewActivity.class);
+        intent.putExtra(FullscreenViewActivity.KEY_SECRET_IMAGE, image);
+        intent.putExtra(FullscreenViewActivity.KEY_IMAGE_POSITION, position);
         detailActivityLauncher.launch(intent);
     }
 
@@ -109,9 +110,19 @@ public class GalleryActivity extends AppCompatActivity implements SecretImageMan
         runOnUiThread(this::updateImageListInUI);
     }
 
+    @Override
+    public void onSecretImageRemoved(int position) {
+        runOnUiThread(() -> {
+            adapter.setImageList(secretImageManager.getSecretImagesList());
+            adapter.notifyItemRemoved(position);
+        });
+    }
+
 
     @Override
-    public void onSecretImageSelected(SecretImage image) {
-        startDetailActivityForImage(image);
+    public void onSecretImageSelected(SecretImage image, int position) {
+        startDetailActivityForImage(image, position);
     }
+
+
 }
